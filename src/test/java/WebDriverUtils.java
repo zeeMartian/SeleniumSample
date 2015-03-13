@@ -34,6 +34,7 @@ public class WebDriverUtils {
     public RemoteWebDriver getRemoteWebDriver(String browser){
         RemoteWebDriver driver = null;
         if(browser.equals("firefox") || browser.equals("Firefox") || browser.equals("Mozilla Firefox")){
+            //create the respective capabilities to load
             DesiredCapabilities capabilities = DesiredCapabilities.firefox();
             try{
                 driver =  new RemoteWebDriver(new URL(URL), capabilities);
@@ -62,11 +63,13 @@ public class WebDriverUtils {
         WebElement ele = null;
         boolean unfound = true;
         int tries = 0;
+        //attempt to find the element, ignoring "misses" up to the number of acceptable attempts
         while (unfound && tries < MAX_ATTEMPTS) {
             tries += 1;
             try {
                 ele = driver.findElement(locator);
                 unfound = false; // success
+            //catch any errors meaning it was not found
             } catch (StaleElementReferenceException ser) {
                 unfound = true;
             } catch (NoSuchElementException nse) {

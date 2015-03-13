@@ -26,9 +26,10 @@ public class WebDriverUtils {
     public WebDriverUtils(){ }
 
     /**
-     * getRemoteWebDriver -
+     * getRemoteWebDriver - Returnd a RemoteWebDriver connected to the Browserstack test account hub.
+     * Current only supports Firefox.
      * @param browser
-     * @return
+     * @return RemoteWebDriver driver
      */
     public RemoteWebDriver getRemoteWebDriver(String browser){
         RemoteWebDriver driver = null;
@@ -52,9 +53,9 @@ public class WebDriverUtils {
     }
 
     /**
-     *
+     * findElementByLocator() - Uses polling to locate and return an element using the provided locator function.
      * @param locator
-     * @return
+     * @return WebElement ele
      */
     public static WebElement findElementByLocator(RemoteWebDriver driver, By locator) {
         driver.manage().timeouts().implicitlyWait(9, TimeUnit.SECONDS);
@@ -79,7 +80,10 @@ public class WebDriverUtils {
     }
 
     /**
+     * findElementsByLocator() - Uses polling to locate and return a list of elements using the provided locator function.
      *
+     * @param locator
+     * @return WebElement ele
      */
     public static List<WebElement> findElementsByLocator(RemoteWebDriver driver, By locator){
         driver.manage().timeouts().implicitlyWait(9, TimeUnit.SECONDS);
@@ -104,7 +108,7 @@ public class WebDriverUtils {
     }
 
     /**
-     *
+     * clickElementByLocator() - Uses polling to find and click a WebElement using the provided locator.
      * @param locator
      * @return
      */
@@ -131,6 +135,12 @@ public class WebDriverUtils {
         return ele;
     }
 
+    /**
+     * typeToElementByLocator() - Uses polling to find and send the provided text to a WebElement.
+     *
+     * @param locator
+     * @return WebElement ele
+     */
     public static void typeToElementByLocator(RemoteWebDriver driver, By locator, String text){
         driver.manage().timeouts().implicitlyWait(9, TimeUnit.SECONDS);
         WebElement ele = null;
